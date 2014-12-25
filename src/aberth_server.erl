@@ -34,7 +34,6 @@ start_link() ->
             {ok, WorkerNum} -> WorkerNum;
             undefined -> 100
         end,
-    lager:info("Starting ~p workers", [Workers]),
     wpool:start_pool(
       ?MODULE,
       [{workers, Workers},
@@ -72,8 +71,6 @@ handle_call({add_handlers, Handlers}, _From, Table) ->
 
 handle_call({lookup, Handler}, _From, Table) ->
 	[{handlers, Handlers}] = ets:lookup(Table, handlers),
-	lager:debug("I have handlers: ~p~n", [Handlers]),
-	lager:debug("Looking for handler: ~p~n", [Handler]),
 	Reply = lists:member(Handler, Handlers),
 	{reply, Reply, Table};
 
