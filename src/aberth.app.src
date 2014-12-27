@@ -1,17 +1,13 @@
-{application, aberth,
- [
-  {description, ""},
+{application, aberth, [
+  {description, "BertRPC Server"},
   {vsn, "1"},
   {registered, []},
-  {applications, [
-                  kernel,
-                  stdlib,
-                  sasl,
-                  compiler,
-                  syntax_tools,
-                  barrel,
-                  worker_pool
-                 ]},
-  {mod, { aberth_app, []}},
-  {env, []}
+  {applications, [kernel, stdlib, barrel]},
+  {mod, {aberth_app, []}},
+  {env, [
+    {pool, [
+      {size, 50},
+      {max_overflow, 100}
+    ]}
+  ]}
  ]}.

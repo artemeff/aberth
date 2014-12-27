@@ -13,12 +13,8 @@
 %% OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 -module(aberth).
-
-%% API.
 -export([start/0, stop/0]).
-
 -export([start_server/3]).
-%% Utils
 -export([no_such_module/1, not_allowed/1, not_loaded/1]).
 
 %% Types
@@ -28,9 +24,7 @@
 
 %% Aplication
 start() ->
-	application:load(aberth),
-    aberth_app:ensure_deps_started(),
-	ok = application:start(aberth).
+	application:ensure_all_started(aberth).
 
 stop() ->
 	application:stop(aberth).
